@@ -9,7 +9,7 @@ import {
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [view, setView] = useState('login'); // <-- 'login', 'poster', 'dashboard', atau 'mading'
+  const [view, setView] = useState('login'); // <-- 'login', 'poster', 'dashboard', or 'mading'
   const [nimInput, setNimInput] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
   const [regForm, setRegForm] = useState({ nama: '', nim: '', prodi: '', email: '' });
@@ -249,7 +249,7 @@ export default function App() {
       if (insertError) throw insertError;
 
       setMadingText('');
-      madingImage(null);
+      setMadingImage(null); // <-- Di sini sudah diperbaiki menjadi setMadingImage ✅
       setMadingPreviewUrl(null);
       fetchMadingPosts();
     } catch (err) {
@@ -487,7 +487,7 @@ export default function App() {
               <span className="text-xs font-semibold text-slate-700 truncate max-w-[70px]">{user.nama ? user.nama.split(' ')[0] : 'User'}</span>
             </div>
 
-            {/* 💬 ICON CHAT SIMPEL SEBAGAI GANTI TOMBOL MADING HITAM */}
+            {/* 💬 ICON CHAT SIMPEL */}
             <button 
                onClick={() => setView('mading')}
                className="p-2 text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-all"
@@ -667,7 +667,7 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Data Biodata</h4>
+                <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Biodata</h4>
                 <div className="bg-white border border-slate-200 rounded-xl p-3 space-y-2 text-xs">
                   <div className="flex justify-between">
                     <span className="text-gray-400">Nama</span>
@@ -681,25 +681,8 @@ export default function App() {
                     <span className="text-gray-400">Prodi</span>
                     <span className="font-semibold text-gray-800">{user.prodi}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Email</span>
-                    <span className="font-semibold text-gray-800">{user.email}</span>
-                  </div>
                 </div>
               </div>
-
-              {/* LOGOUT BUTTON */}
-              <button 
-                onClick={() => {
-                  setUser(null);
-                  setView('login');
-                  setIsProfileOpen(false);
-                }}
-                className="w-full py-2.5 bg-rose-50 text-rose-600 font-semibold rounded-xl text-xs flex items-center justify-center space-x-1.5 border border-rose-100 active:bg-rose-100 transition-all"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-                <span>Keluar Akun</span>
-              </button>
 
             </div>
           </div>
